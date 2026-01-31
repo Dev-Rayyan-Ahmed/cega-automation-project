@@ -10,7 +10,7 @@ export default function Home() {
           Login
         </button>
 
-        <button className="bg-[#173e81] text-white hover:text-[#2093b3] px-14 py-4 border-2 border-white rounded-2xl font-extrabold">
+        <button  className="bg-[#173e81] text-white hover:text-[#2093b3] px-14 py-4 border-2 border-white rounded-2xl font-extrabold">
           DashBoard
         </button>
       </div>
