@@ -1,5 +1,6 @@
 import { Eye, HomeIcon, UserPenIcon, View } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 
@@ -15,19 +16,28 @@ export default function SideBar() {
                         <Image alt="logo" src={"/cegalogo.svg"} width={150} height={150} />
 
                         <ul className="mt-16 font-bold flex flex-col gap-4">
-                              <li className="bg-white flex justify-center items-center gap-2 rounded min-h-12 hover:bg-[#173e81] hover:text-white hover:cursor-pointer">
-                                    <HomeIcon className="" />
-                                    Home
-                              </li>
-                              <li className="bg-white flex justify-center items-center gap-2 rounded min-h-12 hover:bg-[#173e81] hover:text-white hover:cursor-pointer">
-                                    <UserPenIcon className="" />
-                                    Add Resident
-                              </li>
+                              <Link href={"/dashboard"}>
+                                    <li className="bg-white flex justify-center items-center gap-2 rounded-full min-h-10 text-[#173e81] hover:bg-[#173e81] hover:text-white hover:cursor-pointer">
+                                          <HomeIcon className="" />
+                                          <span> Home</span>
 
-                              <li className="bg-white flex justify-center items-center gap-2 rounded min-h-12 hover:bg-[#173e81] hover:text-white hover:cursor-pointer">
-                                    <Eye className="" />
-                                    View Resident
-                              </li>
+                                    </li>
+                              </Link>
+
+                              <Link href={"/dashboard/add-resident"}>
+                                    <li className="bg-white flex justify-center items-center gap-2 rounded-full min-h-10 text-[#173e81] hover:bg-[#173e81] hover:text-white hover:cursor-pointer">
+                                          <UserPenIcon className="" />
+                                          <span> Add Resident</span>
+                                    </li>
+                              </Link>
+
+
+                              <Link href={"/dashboard/view-resident"}>
+                                    <li className="bg-white flex justify-center items-center gap-2 rounded-full min-h-10 text-[#173e81] hover:bg-[#173e81] hover:text-white hover:cursor-pointer">
+                                          <Eye className="" />
+                                          <span> View Resident</span>
+                                    </li>
+                              </Link>
 
                         </ul>
                   </div>

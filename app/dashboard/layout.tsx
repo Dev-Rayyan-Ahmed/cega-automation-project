@@ -1,4 +1,3 @@
-import BackgroundBlur from "@/components/blur-background";
 import SideBar from "@/components/side-bar";
 
 export default function DashBoardLayout({
@@ -7,11 +6,10 @@ export default function DashBoardLayout({
       children: React.ReactNode;
 }>) {
       return (
-            <main className="flex w-full p-0 md:p-2 h-screen overflow-hidden">
-                  <BackgroundBlur />
+            <main className="flex p-0 md:p-2 h-screen overflow-hidden">
                   <SideBar />
 
-                  <div className=" conatiner w-full md:w-5/6 p-4 bg-white rounded-none md:rounded-r-3xl">
+                  <div className="md:w-5/6 p-4 bg-white rounded-none md:rounded-r-3xl">
                         {children}
                   </div>
             </main>
