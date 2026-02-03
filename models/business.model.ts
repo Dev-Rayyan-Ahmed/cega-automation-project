@@ -16,8 +16,8 @@ export interface IBusiness extends Document {
     businessName: string;
     businessStage: BusinessStage;
     location: Branch,
-    businessDescription: string;
-    problemSolution: string;
+    description: string;
+    problemSolved: string;
     assets: string;
     coWorkers: Types.ObjectId[] | string[];
     createdAt: Date;
@@ -38,13 +38,13 @@ const businessSchema = new Schema<IBusiness>({
         required: true,
     },
 
-    businessDescription: {
+    description: {
         type: String,
         required: true,
         trim: true
     },
 
-    problemSolution: {
+    problemSolved: {
         type: String,
         required: true,
         trim: true
