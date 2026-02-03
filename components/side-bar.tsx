@@ -1,4 +1,4 @@
-import { Eye, HomeIcon, UserPenIcon, View } from "lucide-react";
+import { Briefcase, Eye, HomeIcon, UserPenIcon, View } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -20,6 +20,14 @@ export default function SideBar() {
                                     <li className="bg-white flex justify-center items-center gap-2 rounded-full min-h-10 text-[#173e81] hover:bg-[#173e81] hover:text-white hover:cursor-pointer">
                                           <HomeIcon className="" />
                                           <span> Home</span>
+
+                                    </li>
+                              </Link>
+
+                              <Link href={"/dashboard/add-business"}>
+                                    <li className="bg-white flex justify-center items-center gap-2 rounded-full min-h-10 text-[#173e81] hover:bg-[#173e81] hover:text-white hover:cursor-pointer">
+                                          <Briefcase className="" />
+                                          <span> Add Business</span>
 
                                     </li>
                               </Link>

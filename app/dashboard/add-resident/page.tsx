@@ -1,5 +1,5 @@
 import React from "react";
-import BasicForm from "./form";
+import BasicForm from "../../../components/forms/coWorkerForm";
 
 
 export default function Resident() {
