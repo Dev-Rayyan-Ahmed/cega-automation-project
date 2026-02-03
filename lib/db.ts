@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
 
-const DB_URI = process.env.MONGODB_URI;
+const DB_URI = process.env.DB_URI;
 
 if (!DB_URI) {
-    throw new Error("Please define the MONGODB_URI environment variable in .env.local");
+    throw new Error("Please define the DB_URI environment variable in .env.local");
 }
 
 /** * In Next.js, we use a global variable to store the connection 
@@ -36,6 +36,7 @@ async function dbConnect() {
     // If someone is currently connecting, wait for the existing promise to resolve 
     if (!cached.promise) {
         const opts = {
+            dbName: "cega-automation",
             bufferCommands: false, // Stop Mongoose from queuing commands if the connection is down (bad for serverless cuz of timeout)
         };
 
