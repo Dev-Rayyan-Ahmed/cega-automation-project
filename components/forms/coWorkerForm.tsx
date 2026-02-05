@@ -1,15 +1,40 @@
 "use client";
 import { useState } from "react";
 import { TextInputField } from "@/components/inputFields/inputFields";
+import SearchableSelect from "../inputFields/businessSearchSelect";
+import { addCoworker } from "@/actions/coworker";
+import toast, { Toaster } from "react-hot-toast";
 
-export default function CoWorkerForm() {
-      const [formData, setFormData] = useState({
+type coWorkerFormProps = {
+      businesses: { _id: string; selectItemName: string }[];
+      seats: { _id: string; selectItemName: string }[];
+}
+export interface coWorkerFormData {
+      fullName: string;
+      dateOfBirth: string;
+      gender: string;
+      nationality: string;
+      phone: string;
+      cnic: string;
+      email: string;
+      address: string;
+      lockerNo: string;
+      dateOfJoining: string;
+      emergencyContactName: string;
+      emergencyPhoneNo: string;
+      relationship: string;
+      business: string,
+      seat: string
+}
+export default function CoWorkerForm({ businesses, seats }: coWorkerFormProps) {
+      const [formData, setFormData] = useState<coWorkerFormData>({
             // Personal Information
             fullName: "", dateOfBirth: "", gender: "", nationality: "",
             phone: "", cnic: "", email: "", address: "",
             lockerNo: "", dateOfJoining: "",
-            emergencyName: "", emergencyPhone: "", relationship: "",
-
+            emergencyContactName: "", emergencyPhoneNo: "", relationship: "",
+            business: "",
+            seat: ""
       });
 
       const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -17,10 +42,21 @@ export default function CoWorkerForm() {
             setFormData((prev) => ({ ...prev, [name]: value }));
       };
 
-      const handleSubmit = (e: React.FormEvent) => {
+      const handleSubmit = async (e: React.FormEvent) => {
             e.preventDefault();
-            console.log("Form Data Submitted:", formData);
+            const { success, error, message } = await addCoworker(formData);
+            if (success) {
+                  toast.success(message!)
+            }
+            else
+                  toast.error(message!);
       };
+      const handelBusinessSelect = (businessId: string) => {
+            setFormData((prev) => ({ ...prev, business: businessId }))
+      }
+      const handelSeatSelect = (seatId: string) => {
+            setFormData((prev) => ({ ...prev, seat: seatId }))
+      }
 
       return (
             <div className=" p-8 max-h-[95vh] overflow-y-auto custom-scrollbar">
@@ -37,7 +73,7 @@ export default function CoWorkerForm() {
                               </h3>
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <TextInputField label="Full Name" name="fullName" value={formData.fullName} onChange={handleChange} required />
-                                    <TextInputField label="Date of Birth" name="dateOfBirth" type="date" value={formData.dateOfBirth} onChange={handleChange} required/>
+                                    <TextInputField label="Date of Birth" name="dateOfBirth" type="date" value={formData.dateOfBirth} onChange={handleChange} required />
 
                                     <div>
                                           <label className="block mb-1 font-medium">Gender</label>
@@ -48,28 +84,33 @@ export default function CoWorkerForm() {
                                           </select>
                                     </div>
 
-                                    <TextInputField label="Nationality" name="nationality" value={formData.nationality} onChange={handleChange} required/>
+                                    <TextInputField label="Nationality" name="nationality" value={formData.nationality} onChange={handleChange} required />
                                     <TextInputField label="Phone Number" name="phone" type="tel" value={formData.phone} onChange={handleChange} required />
                                     <TextInputField label="CNIC" name="cnic" value={formData.cnic} onChange={handleChange} required />
                                     <TextInputField label="Email Address" name="email" type="email" value={formData.email} onChange={handleChange} required />
-                                    <TextInputField label="Residential Address" name="address" value={formData.address} onChange={handleChange} required/>
-                                    <TextInputField label="Issued Locker No." name="lockerNo" value={formData.lockerNo} onChange={handleChange} required/>
-                                    <TextInputField label="Date of Joining" name="dateOfJoining" type="date" value={formData.dateOfJoining} onChange={handleChange} required/>
+                                    <TextInputField label="Residential Address" name="address" value={formData.address} onChange={handleChange} required />
+                                    <TextInputField label="Issued Locker No." name="lockerNo" value={formData.lockerNo} onChange={handleChange} required />
+                                    <TextInputField label="Date of Joining" name="dateOfJoining" type="date" value={formData.dateOfJoining} onChange={handleChange} required />
                               </div>
 
                               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                                    <TextInputField label="Emergency Contact Name" name="emergencyName" value={formData.emergencyName} onChange={handleChange} required/>
-                                    <TextInputField label="Emergency Phone No" name="emergencyPhone" value={formData.emergencyPhone} onChange={handleChange} required/>
-                                    <TextInputField label="Relationship" name="relationship" value={formData.relationship} onChange={handleChange} required/>
+                                    <TextInputField label="Emergency Contact Name" name="emergencyContactName" value={formData.emergencyContactName} onChange={handleChange} required />
+                                    <TextInputField label="Emergency Phone No" name="emergencyPhoneNo" value={formData.emergencyPhoneNo} onChange={handleChange} required />
+                                    <TextInputField label="Relationship" name="relationship" value={formData.relationship} onChange={handleChange} required />
                               </div>
                         </section>
 
-                        {/* SECTION 2: BUSINESS/STARTUP INFORMATION */}
+                        {/* Attached Seats */}
+                        <SearchableSelect name="seats" selectItems={seats} onSelect={handelSeatSelect} />
+
+                        {/* SECTION: BUSINESS/STARTUP INFORMATION */}
+                        <SearchableSelect name="Business" selectItems={businesses} onSelect={handelBusinessSelect} />
 
                         <button type="submit" className="w-full bg-blue-900 text-white py-4 rounded-xl font-bold text-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-900/30 transition-all">
                               Submit Registration
                         </button>
                   </form>
+                  <Toaster />
             </div>
       );
 }

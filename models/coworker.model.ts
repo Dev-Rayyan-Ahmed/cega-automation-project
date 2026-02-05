@@ -8,13 +8,14 @@ enum GENDER {
 
 export interface ICoWorker extends Document {
     fullName: string;
-    DOB: Date;
+    dateOfBirth: Date;
     gender: GENDER;
     nationality: string;
-    phoneNo: string;
-    CNIC: string;
+    phone: string;
+    cnic: string;
     email: string;
-    residentAddress: string;
+    address: string;
+    business: string
     lockerNo: string;
     dateOfJoining: Date;
     emergencyContactName: string;
@@ -28,7 +29,7 @@ const CoWorkerSchema: Schema = new Schema({
         required: [true, 'Full name is required'],
         trim: true
     },
-    DOB: {
+    dateOfBirth: {
         type: Date,
         required: [true, 'Date of birth is required']
     },
@@ -42,11 +43,11 @@ const CoWorkerSchema: Schema = new Schema({
         required: true,
         default: 'Pakistani'
     },
-    phoneNo: {
+    phone: {
         type: String,
         required: true
     },
-    CNIC: {
+    cnic: {
         type: String,
         required: [true, 'CNIC is required'],
         unique: true,
@@ -59,7 +60,7 @@ const CoWorkerSchema: Schema = new Schema({
         lowercase: true,
         trim: true
     },
-    residentAddress: {
+    address: {
         type: String,
         required: true
     },
@@ -85,7 +86,7 @@ const CoWorkerSchema: Schema = new Schema({
         required: true
     },
 
-    businessAssociated: {
+    business: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Business"
     }

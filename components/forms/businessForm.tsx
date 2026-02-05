@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { TextAreaField, TextInputField } from "../inputFields/inputFields";
 import { useRouter } from "next/navigation";
-import addBusiness from "@/actions/add-business";
+import addBusiness from "@/actions/business";
 import toast, { Toaster } from "react-hot-toast";
 
 export interface BusinessFormData {
@@ -15,7 +15,10 @@ export interface BusinessFormData {
       assets: string;
 }
 
-export default function BusinessForm() {
+type BusinessFormProps = {
+      locationOptions: string[];
+}
+export default function BusinessForm({ locationOptions }: BusinessFormProps) {
       const router = useRouter(); // Initialize router
 
       const [businessFormData, setBusinessFormData] = useState<BusinessFormData>({
@@ -24,8 +27,6 @@ export default function BusinessForm() {
             businessName: "", industry: "", businessStage: "", businessLocation: "",
             description: "", problemSolved: "", assets: "",
       });
-
-
       const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
             const { name, value } = e.target;
             setBusinessFormData((prev) => ({ ...prev, [name]: value }));
@@ -39,8 +40,7 @@ export default function BusinessForm() {
                   toast.success(message!)
             }
             else
-                  toast.error(error!);
-
+                  toast.error(message!);
       };
 
       return (
@@ -64,8 +64,8 @@ export default function BusinessForm() {
                                                 <option value="">Select Stage</option>
                                                 <option value="Idea">Idea</option>
                                                 <option value="Early Stage">Early Stage</option>
-                                                <option value="Prototype">Prototype</option>
-                                                <option value="Revenue-generating">Revenue-generating</option>
+                                                <option value="ProtoType">Prototype</option>
+                                                <option value="Revenue Generating">Revenue Generating</option>
                                           </select>
                                     </div>
 
@@ -77,8 +77,7 @@ export default function BusinessForm() {
                                           <label className="block mb-1.5 font-medium">Business Location</label>
                                           <select name="businessLocation" onChange={handleChange} className="w-full border rounded-lg p-2 outline-none focus:ring-4 focus:ring-blue-900/20" required>
                                                 <option value="">Select Location</option>
-                                                <option value="Karachi">Karachi</option>
-                                                <option value="Lahore">Lahore</option>
+                                                {locationOptions.map((option, index) => <option key={index} value={option}>{option}</option>)}
                                           </select>
                                     </div>
                               </div>

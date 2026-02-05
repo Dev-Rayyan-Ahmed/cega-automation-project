@@ -7,7 +7,7 @@ function page() {
         <button onClick={test} className='bg-red-200 px-12 py-5 rounded-full'>run test</button>
     </div>
     );
-    
+
 }
 
 export default page

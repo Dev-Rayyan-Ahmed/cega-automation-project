@@ -1,6 +1,7 @@
 "use server"
 
 import dbConnect from "@/lib/db"
+import Seat from "@/models/seats.model";
 import User from "@/models/user.model";
 
 export default async function test() {

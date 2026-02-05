@@ -26,3 +26,26 @@ async function decrypt(token: string) {
         return null;
     }
 }
+
+
+export async function getLocationOptions() {
+
+    const user = await getSessionUser();
+    if (!user) {
+        return [];
+    };
+
+    const { role } = user;
+    if (role == "KHI-ADMIN") return ["Karachi"];
+    else if (role == "LHR-ADMIN") return ["Lahore"];
+    else return ["Karachi", "Lahore"];
+}
+
+
+
+export const roleBranch: Record<string, string> = {
+    "KHI-ADMIN": "Karachi",
+    "LHR-ADMIN": "Lahore",
+    "ADMIN": "All",
+
+}
