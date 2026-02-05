@@ -1,9 +1,11 @@
 import React from 'react'
 import BusinessForm from '@/components/forms/businessForm'
+import { getLocationOptions } from '@/lib/auth-utils'
 
-function page() {
+async function page() {
+      const locationOptions = await getLocationOptions()
       return (
-            <div><BusinessForm /></div>
+            <div><BusinessForm locationOptions={locationOptions} /></div>
       )
 }
 

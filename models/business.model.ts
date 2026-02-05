@@ -8,14 +8,14 @@ enum BusinessStage {
 }
 
 enum Branch {
-    Lahore = 'LHR',
-    Karachi = 'KHI'
+    Lahore = 'Lahore',
+    Karachi = 'Karachi'
 }
 
 export interface IBusiness extends Document {
     businessName: string;
     businessStage: BusinessStage;
-    location: Branch,
+    businessLocation: Branch,
     description: string;
     problemSolved: string;
     assets: string;
@@ -29,12 +29,17 @@ const businessSchema = new Schema<IBusiness>({
         type: String,
         required: true,
         unique: true,
-        lowercase: true,
+        uppercase: true,
         trim: true
     },
     businessStage: {
         type: String,
         enum: Object.values(BusinessStage),
+        required: true,
+    },
+    businessLocation: {
+        type: String,
+        enum: Object.values(Branch),
         required: true,
     },
 

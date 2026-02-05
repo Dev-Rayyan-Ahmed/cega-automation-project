@@ -1,15 +1,14 @@
 import mongoose, { Schema, Document, Model, Types } from "mongoose";
 
 enum Branch {
-    Lahore = 'LHR',
-    Karachi = 'KHI'
+    Lahore = 'Lahore',
+    Karachi = 'Karachi'
 }
 
 export interface ISeat extends Document {
     seatNumber: string;
     branch: Branch;
-    coWorker?: Types.ObjectId; 
-    business?: Types.ObjectId; 
+    bookingDetails?: Types.ObjectId;
     isOccupied: boolean;
 }
 
@@ -24,15 +23,9 @@ const seatSchema = new Schema<ISeat>({
         enum: Object.values(Branch),
         required: [true, 'Branch location is required']
     },
-    coWorker: {
+    bookingDetails: {
         type: Schema.Types.ObjectId,
-        ref: "CoWorker",
-        default: null
-    },
-    business: {
-        type: Schema.Types.ObjectId,
-        ref: "Business",
-        default: null
+        ref: "Booking"
     },
     isOccupied: {
         type: Boolean,
