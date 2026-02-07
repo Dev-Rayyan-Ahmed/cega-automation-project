@@ -164,7 +164,7 @@ export default async function DemoPage() {
         </h2>
 
         <Link
-          href="/dashboard/add-business"
+          href="/dashboard/businesses/add"
           className="w-full sm:w-auto flex justify-center items-center bg-[#173e81] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#2093b3] transition-all shadow-lg shadow-blue-900/20
   ">
           + Register Business

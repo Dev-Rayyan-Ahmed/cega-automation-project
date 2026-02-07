@@ -24,18 +24,18 @@ export default function SideBar() {
                                     </li>
                               </Link>
 
-                              <Link href={"/dashboard/add-business"}>
+                              <Link href={"/dashboard/businesses"}>
                                     <li className="bg-white flex justify-center items-center gap-2 rounded-full min-h-10 text-[#173e81] hover:bg-[#173e81] hover:text-white hover:cursor-pointer">
                                           <Briefcase className="" />
-                                          <span> Add Business</span>
+                                          <span>Business</span>
 
                                     </li>
                               </Link>
 
-                              <Link href={"/dashboard/add-resident"}>
+                              <Link href={"/dashboard/coworkers"}>
                                     <li className="bg-white flex justify-center items-center gap-2 rounded-full min-h-10 text-[#173e81] hover:bg-[#173e81] hover:text-white hover:cursor-pointer">
                                           <UserPenIcon className="" />
-                                          <span> Add Resident</span>
+                                          <span> Co-Workers </span>
                                     </li>
                               </Link>
 
