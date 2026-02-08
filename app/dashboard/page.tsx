@@ -1,5 +1,9 @@
-import BusinessTable from "@/components/tables/Table";
+import BusinessTable from "@/components/homeTable/homeTable";
+import { ArmchairIcon } from "@/components/icons/tabler-armchair";
+import { ArmchairOffIcon } from "@/components/icons/tabler-armchair-off";
+import { MailCheck } from "lucide-react";
 import Link from "next/link";
+import DemoPage from "./bookings/page";
 
 export default function HomePage() {
   return (
@@ -16,8 +20,50 @@ export default function HomePage() {
           + Register Business
         </Link>
       </div>
+      <div className="flex flex-col sm:flex-row gap-4 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
 
-      <BusinessTable />
+          <div className="flex items-center justify-between bg-white border border-gray-200 
+                  rounded-xl p-5 shadow-sm">
+            <div>
+              <p className="text-sm text-gray-500">Seats Free</p>
+              <p className="text-2xl font-semibold text-gray-900">30</p>
+            </div>
+            <div className="bg-blue-50 text-blue-600 p-3 rounded-lg">
+              <ArmchairIcon size={20} />
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between bg-white border border-gray-200 
+                  rounded-xl p-5 shadow-sm">
+            <div>
+              <p className="text-sm text-gray-500">Seats Filled</p>
+              <p className="text-2xl font-semibold text-gray-900">20</p>
+            </div>
+            <div className="bg-red-50 text-red-600 p-3 rounded-lg">
+              <ArmchairOffIcon size={20} />
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between bg-white border border-gray-200 
+                  rounded-xl p-5 shadow-sm">
+            <div>
+              <p className="text-sm text-gray-500">Seats Going To Empty (This Month)</p>
+              <p className="text-2xl font-semibold text-gray-900">20</p>
+            </div>
+            <div className="bg-green-50 text-green-600 p-3 rounded-lg">
+              <MailCheck size={20} />
+            </div>
+          </div>
+
+        </div>
+        </div>
+        <div className="">
+
+          <DemoPage/>
+        </div>
+
+        
 
     </main>
   );
