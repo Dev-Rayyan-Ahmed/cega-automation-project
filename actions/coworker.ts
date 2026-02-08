@@ -1,12 +1,29 @@
 "use server";
 
 import { coWorkerFormData } from "@/components/forms/coWorkerForm";
+import { getSessionUser, roleBranch } from "@/lib/auth-utils";
 import dbConnect from "@/lib/db";
 import { returnResponse } from "@/lib/utils";
 import Booking from "@/models/booking.model";
 import Business from "@/models/business.model";
 import CoWorker from "@/models/coworker.model";
 import Seat from "@/models/seats.model";
+
+export interface CoworkerData {
+    _id: string;
+    fullName: string;
+    email: string;
+    phone: string;
+    dateOfJoining: string;
+    business: {
+        _id: string;
+        businessName: string;
+    } | null;
+}
+
+export interface ReturnGetCoworker extends returnResponse {
+    data: CoworkerData[];
+}
 
 export async function addCoworker(coWorkerData: coWorkerFormData): Promise<returnResponse> {
     try {
@@ -72,6 +89,51 @@ export async function addCoworker(coWorkerData: coWorkerFormData): Promise<retur
             success: false,
             error: "server_error",
             message: error instanceof Error ? error.message : "Internal Server Error"
+        };
+    }
+}
+
+export async function getCoworkers() {
+    try {
+        const user = await getSessionUser();
+
+        if (!user) {
+            return { error: "authentication_required", message: "Please log in to continue.", success: false, data: [] };
+        }
+
+        await dbConnect();
+
+
+        let query = {};
+        if (user.role !== "ADMIN") {
+            const location = roleBranch[user.role];
+            if (!location) return { error: "unauthorized_role", message: "Invalid role assigned.", success: false, data: [] };
+
+            // we have to find all the business id in that location 
+            const businessesInLocation = await Business.find({ businessLocation: location }).select('_id');
+            const businessIds = businessesInLocation.map(b => b._id);
+
+            query = { business: { $in: businessIds } };
+        }
+
+
+        const coworkers = await CoWorker.find(query, "fullName email phone dateOfJoining business")
+            .populate("business", "businessName") // Only get the name from the Business model
+            .lean();
+
+        return {
+            success: true,
+            data: JSON.parse(JSON.stringify(coworkers)),
+            message: "Coworkers fetched successfully"
+        };
+
+    } catch (error) {
+        console.error("Fetch Coworker Error:", error);
+        return {
+            error: "server_error",
+            message: error instanceof Error ? error.message : "Internal Server Error",
+            success: false,
+            data: []
         };
     }
 }

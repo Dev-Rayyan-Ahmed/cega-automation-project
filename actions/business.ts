@@ -10,9 +10,11 @@ import { returnResponse } from "@/lib/utils";
 
 
 type BusinessItem = {
-    _id: string;
-    businessName: string;
-    __v?: number
+    _id: string
+    businessName: string
+    businessLocation: string
+    businessStage: string
+    createdAt: Date
 };
 
 interface returnGetBusiness extends returnResponse {
@@ -57,7 +59,7 @@ export async function getBusiness(): Promise<returnGetBusiness> {
             query = { businessLocation: location };
         }
 
-        const businesses = await Business.find(query, "businessName").lean();
+        const businesses = await Business.find(query, "businessName businessLocation businessStage createdAt").lean();
 
         return {
             success: true,

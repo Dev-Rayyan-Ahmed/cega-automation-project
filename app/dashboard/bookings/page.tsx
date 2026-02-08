@@ -1,12 +1,11 @@
-
 import React from 'react'
 import Link from 'next/link'
-import { CoWorkersTable } from '@/components/coWorkersTable/coWorkersTable';
-import { CoWorkersColumns, cowrokerscolumns } from '@/components/coWorkersTable/coWorkersColumns';
-import { getCoworkers } from '@/actions/coworker';
+import { BookingsTable } from '@/components/bookingsTable/bookingsTable';
+import { bookingscolumns } from '@/components/bookingsTable/bookingsColumns';
+import { FlatBookingColumns, getBookings } from '@/actions/booking';
 
-async function getData(): Promise<CoWorkersColumns[]> {
-  const { data } = await getCoworkers();
+async function getData(): Promise<FlatBookingColumns[]> {
+  const { data } = await getBookings();
   return data;
 }
 
@@ -18,21 +17,14 @@ export default async function DemoPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-5 text-center sm:text-left">
         <h2 className="text-2xl md:text-3xl font-bold text-[#173e81] uppercase tracking-wide text-center sm:text-left">
-          Co-Workers
+          Bookings
         </h2>
-
-        <Link
-          href="/dashboard/coworkers/add"
-          className="w-full sm:w-auto flex justify-center items-center bg-[#173e81] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#2093b3] transition-all shadow-lg shadow-blue-900/20
-  ">
-          + Register Co-Worker
-        </Link>
       </div>
 
       {/* Table */}
       <div className="w-full overflow-x-scroll overflow-y-hidden touch-pan-x overscroll-x-contain">
         <div className="min-w-225 max-h-[75vh] overflow-y-auto ">
-          <CoWorkersTable columns={cowrokerscolumns} data={data} />
+          <BookingsTable columns={bookingscolumns} data={data} />
         </div>
       </div>
     </div>

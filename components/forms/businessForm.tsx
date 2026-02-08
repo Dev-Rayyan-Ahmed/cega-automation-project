@@ -45,7 +45,7 @@ export default function BusinessForm({ locationOptions }: BusinessFormProps) {
 
       return (
 
-            <div className=" p-8 max-h-[95vh] overflow-y-auto custom-scrollbar">
+            <div className=" p-8 max-h-[93vh] overflow-y-auto custom-scrollbar">
                   <h2 className="text-3xl font-bold mb-8 text-center text-blue-900 uppercase ">
                         Business Registration Form
                   </h2>

@@ -31,15 +31,15 @@ import {
 
 import { Input } from "@/components/ui/input"
 
-interface CoWorkersTableProps<TData, TValue> {
+interface BookingsTableProps<TData, TValue> {
       columns: ColumnDef<TData, TValue>[]
       data: TData[]
 }
 
-export function CoWorkersTable<TData, TValue>({
+export function BookingsTable<TData, TValue>({
       columns,
       data,
-}: CoWorkersTableProps<TData, TValue>) {
+}: BookingsTableProps<TData, TValue>) {
       const [sorting, setSorting] = React.useState<SortingState>([])
       const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
             []
@@ -72,7 +72,7 @@ export function CoWorkersTable<TData, TValue>({
             <div className="w-full">
                   <div className="flex items-center py-4 ">
                         <Input
-                              placeholder="Filter Co-Worker names..."
+                              placeholder="Filter Booking names..."
                               value={(table.getColumn("fullName")?.getFilterValue() as string) ?? ""}
                               onChange={(event) =>
                                     table.getColumn("fullName")?.setFilterValue(event.target.value)
@@ -109,7 +109,7 @@ export function CoWorkersTable<TData, TValue>({
                         </DropdownMenu>
                   </div>
 
-                  {/* Businesses Table */}
+                  {/* Booking Table */}
                   <div className="rounded-md border ">
                         <Table className="min-w-200]">
                               <TableHeader>

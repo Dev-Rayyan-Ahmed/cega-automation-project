@@ -7,6 +7,8 @@ export interface IBooking extends Document {
     startDate: Date;
     endDate?: Date;
     amountPaid: number;
+    isRenewed: boolean;
+    timesRenewed: number;
     status: 'Active' | 'Completed' | 'Cancelled';
 }
 
@@ -43,6 +45,14 @@ const bookingSchema = new Schema<IBooking>({
         type: String,
         enum: ['Active', 'Completed', 'Cancelled'],
         default: 'Active'
+    },
+    isRenewed: {
+        type: Boolean,
+        default: false
+    },
+    timesRenewed: {
+        type: Number,
+        default: 0
     }
 }, { timestamps: true });
 

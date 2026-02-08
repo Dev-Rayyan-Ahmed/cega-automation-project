@@ -95,6 +95,6 @@ const CoWorkerSchema: Schema = new Schema({
 });
 
 
-const CoWorker: Model<ICoWorker> = mongoose.model<ICoWorker>("CoWorker", CoWorkerSchema);
+const CoWorker: Model<ICoWorker> = mongoose.models.CoWorker || mongoose.model<ICoWorker>("CoWorker", CoWorkerSchema);
 
 export default CoWorker;
