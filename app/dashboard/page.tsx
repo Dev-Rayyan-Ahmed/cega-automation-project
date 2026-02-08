@@ -3,7 +3,6 @@ import { ArmchairIcon } from "@/components/icons/tabler-armchair";
 import { ArmchairOffIcon } from "@/components/icons/tabler-armchair-off";
 import { MailCheck } from "lucide-react";
 import Link from "next/link";
-import DemoPage from "./bookings/page";
 
 export default function HomePage() {
   return (
@@ -57,13 +56,8 @@ export default function HomePage() {
           </div>
 
         </div>
-        </div>
-        <div className="">
+      </div>
 
-          <DemoPage/>
-        </div>
-
-        
 
     </main>
   );

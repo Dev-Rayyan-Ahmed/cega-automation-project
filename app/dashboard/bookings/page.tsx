@@ -1,5 +1,3 @@
-import React from 'react'
-import Link from 'next/link'
 import { BookingsTable } from '@/components/bookingsTable/bookingsTable';
 import { bookingscolumns } from '@/components/bookingsTable/bookingsColumns';
 import { FlatBookingColumns, getBookings } from '@/actions/booking';
@@ -9,7 +7,7 @@ async function getData(): Promise<FlatBookingColumns[]> {
   return data;
 }
 
-export default async function DemoPage() {
+export default async function BookingPage() {
   const data = await getData()
 
   return (
@@ -22,7 +20,7 @@ export default async function DemoPage() {
       </div>
 
       {/* Table */}
-      <div className="w-full overflow-x-scroll overflow-y-hidden touch-pan-x overscroll-x-contain">
+      <div className="w-full overflow-x-scroll overflow-y-auto touch-pan-x overscroll-x-contain">
         <div className="min-w-225 max-h-[75vh] overflow-y-auto ">
           <BookingsTable columns={bookingscolumns} data={data} />
         </div>

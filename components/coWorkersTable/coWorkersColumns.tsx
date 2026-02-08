@@ -4,6 +4,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { Button } from "../ui/button";
 import { ArrowUpDown, Eye } from "lucide-react";
 import Link from "next/link";
+import { formatDate } from "@/lib/utils";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type CoWorkersColumns = {
@@ -64,17 +65,8 @@ export const cowrokerscolumns: ColumnDef<CoWorkersColumns>[] = [
                   )
             },
             cell: ({ row }) => {
-                  const dateValue: Date = row.getValue("dateOfJoining");
-
-                  const date = new Date(dateValue);
-
-                  const formatted = new Intl.DateTimeFormat("en-GB", {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric",
-                  }).format(date);
-
-                  return <div className="text-center font-medium">{formatted}</div>;
+                  const dateStr: string = row.getValue("dateOfJoining");
+                  return <div className="text-center font-medium">{formatDate(dateStr)}</div>;
             },
       },
       {

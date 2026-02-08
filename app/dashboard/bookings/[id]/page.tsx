@@ -19,6 +19,7 @@ import {
 import "@/models/coworker.model";
 import "@/models/business.model";
 import "@/models/seats.model";
+import { statusColors } from "@/lib/utils";
 
 
 interface PopulatedCoWorker {
@@ -71,12 +72,6 @@ export default async function BookingDetailsPage({
     if (!booking) {
         notFound();
     }
-
-    const statusColors: Record<string, string> = {
-        Active: "bg-green-100 text-green-800 border-green-200",
-        Completed: "bg-blue-100 text-blue-800 border-blue-200",
-        Cancelled: "bg-red-100 text-red-800 border-red-200",
-    };
 
     return (
         <div className="p-6 max-w-5xl mx-auto space-y-6">
@@ -182,7 +177,7 @@ export default async function BookingDetailsPage({
             </div>
 
             <p className="text-center text-[10px] text-gray-400">
-                Data generated from CEGA Backend • Last Sync: {new Date().toLocaleTimeString()}
+                Booking Record ID: {String(booking._id)} • Last Updated: {new Date(booking.createdAt).toLocaleString()}
             </p>
         </div>
     );

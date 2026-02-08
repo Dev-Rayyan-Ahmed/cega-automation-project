@@ -2,18 +2,16 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown, Eye } from "lucide-react"
-
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type BusinessesColumns = {
-      _id: string
-      businessName: string
-      businessLocation: string
-      businessStage: string
-      createdAt: Date
+import { formatDate, stageColors } from "@/lib/utils"
 
+export type BusinessesColumns = {
+      _id: string;
+      businessName: string;
+      businessLocation: string;
+      businessStage: string;
+      createdAt: Date;
 }
 
 export const businesscolumns: ColumnDef<BusinessesColumns>[] = [
@@ -25,11 +23,13 @@ export const businesscolumns: ColumnDef<BusinessesColumns>[] = [
       {
             accessorKey: "businessStage",
             header: "Business Stage",
-            cell: ({ row }) => (
-                  <span className={` text-center px-2 py-1 rounded-full text-xs font-semibold border bg-green-100 text-green-800 border-green-200`}>
+            cell: ({ row }) => {
+                  const businessStage = row.getValue("businessStage") as string
+                  return (<span className={` text-center px-2 py-1 rounded-full text-xs font-semibold border ${stageColors[businessStage]}`}>
                         {row.getValue("businessStage") as string}
-                  </span>
-            )
+                  </span>)
+            }
+
       },
       {
             accessorKey: "businessLocation",
@@ -57,17 +57,8 @@ export const businesscolumns: ColumnDef<BusinessesColumns>[] = [
                   )
             },
             cell: ({ row }) => {
-                  const dateValue: Date = row.getValue("createdAt");
-
-                  const date = new Date(dateValue);
-
-                  const formatted = new Intl.DateTimeFormat("en-GB", {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric",
-                  }).format(date);
-
-                  return <div className="text-center font-medium">{formatted}</div>;
+                  const dateStr: string = row.getValue("createdAt");
+                  return <div className="text-center font-medium">{formatDate(dateStr)}</div>;
             },
       },
       {

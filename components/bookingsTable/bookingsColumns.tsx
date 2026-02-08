@@ -3,7 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { Button } from "../ui/button";
 import { ArrowUpDown, Eye } from "lucide-react";
-import { formatDate } from "@/lib/utils";
+import { formatDate, statusColors } from "@/lib/utils";
 import Link from "next/link";
 
 export type BookingsColumns = {
@@ -43,13 +43,8 @@ export const bookingscolumns: ColumnDef<BookingsColumns>[] = [
             header: "Status",
             cell: ({ row }) => {
                   const status = row.getValue("status") as string;
-                  const colors: Record<string, string> = {
-                        Active: "bg-green-100 text-green-800 border-green-200",
-                        Completed: "bg-blue-100 text-blue-800 border-blue-200",
-                        Cancelled: "bg-red-100 text-red-800 border-red-200",
-                  };
                   return (
-                        <span className={`px-2 py-1 rounded-full text-xs font-semibold border ${colors[status]}`}>
+                        <span className={`px-2 py-1 rounded-full text-xs font-semibold border ${statusColors[status]}`}>
                               {status}
                         </span>
                   );

@@ -68,7 +68,7 @@ export default async function CoworkerDetailsPage({
 
     return (
         <div className="p-8 max-w-6xl mx-auto space-y-6 max-h-[93vh] overflow-y-auto custom-scrollbar">
-            {/* Navigation */}
+            {/* back button */}
             <div className="flex flex-col gap-4">
                 <Link
                     href="/dashboard/coworkers"
@@ -88,7 +88,7 @@ export default async function CoworkerDetailsPage({
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                {/* Primary Profile Card */}
+                {/* card of personal detail */}
                 <Card className="md:col-span-1 shadow-sm border-t-4 border-t-blue-500">
                     <CardContent className="pt-6">
                         <div className="flex flex-col items-center text-center space-y-3">
@@ -117,7 +117,7 @@ export default async function CoworkerDetailsPage({
                     </CardContent>
                 </Card>
 
-                {/* Professional & Workspace Details */}
+                {/* section for professional  details */}
                 <Card className="md:col-span-2 shadow-sm border-t-4 border-t-orange-500">
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
@@ -160,7 +160,7 @@ export default async function CoworkerDetailsPage({
                     </CardContent>
                 </Card>
 
-                {/* Emergency Contact with Full Width */}
+                {/* emergency full details */}
                 <Card className="md:col-span-3 shadow-sm border-l-4 border-l-red-500 bg-red-50/30">
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2 text-red-700">
@@ -188,9 +188,9 @@ export default async function CoworkerDetailsPage({
                 </Card>
             </div>
 
-            {/* <p className="text-center text-[10px] text-gray-400">
-                System Record ID: {worker._id} • Last Updated: {new Date(worker.createdAt).toLocaleString()}
-            </p> */}
+            <p className="text-center text-[10px] text-gray-400">
+                Worker Record ID: {String(worker._id)} • Last Updated: {new Date(worker.createdAt).toLocaleString()}
+            </p>
         </div>
     );
 }
